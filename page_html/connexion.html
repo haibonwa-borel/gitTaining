@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Église - Inscription & Connexion</title>
+    <link rel="stylesheet" href="style_connexion.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Formulaire d'inscription -->
+        <div class="form-box" id="inscription-box">
+            <h2>Inscription</h2>
+            <form>
+                <div class="textbox">
+                    <input type="text" name="nom" placeholder="Nom complet" required>
+                </div>
+                <div class="textbox">
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="textbox">
+                    <input type="password" name="password" placeholder="Mot de passe" required>
+                </div>
+                <div class="textbox">
+                    <input type="date" name="naissance" id="">
+                </div>
+                <div class="textbox">
+                    <details>
+                        <summary>Groupe</summary>
+                        <select name="groupe" id="groupe">
+                            <option value="jeunes">Jeunes</option>
+                            <option value="adultes">Adultes</option>
+                            <option value="enfants">Enfants</option>
+                            <option value="seniors">Seniors</option>
+                            <option value="autres">Autres</option>
+                        </select>
+                        <p>Choisissez le groupe auquel vous appartenez.</p>
+                    </details>
+                <button class="btn">S'inscrire</button>
+                <p>Déjà inscrit ? <span class="toggle" onclick="afficherConnexion()">Clique ici</span></p>
+            </form>
+        </div>
+
+        <!-- Formulaire de connexion (caché par défaut) -->
+        <div class="form-box hidden" id="connexion-box">
+            <h2>Connexion</h2>
+            <form>
+                <div class="textbox">
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="textbox">
+                    <input type="password" name="password" placeholder="Mot de passe" required>
+                </div>
+                <button class="btn">Se connecter</button>
+                <p>Pas encore inscrit ? <span class="toggle" onclick="afficherInscription()">S'inscrire</span></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function afficherConnexion() {
+            document.getElementById("inscription-box").classList.add("hidden");
+            document.getElementById("connexion-box").classList.remove("hidden");
+        }
+
+        function afficherInscription() {
+            document.getElementById("connexion-box").classList.add("hidden");
+            document.getElementById("inscription-box").classList.remove("hidden");
+        }
+    </script>
+
+</body>
+</html>
