@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À propos de nous - Semence Divine</title>
+    <link rel="stylesheet" href="style_apropos.css">
+    
+    <link rel="stylesheet" href="style_predication.css">
+</head>
+<body>
+    <section class="gauche">
+        <nav>
+            <ul>
+                <li ><a href="index.html"><img  src="./image/des-eglises.png" alt=""></a></li>
+                <li><a href="predication.html"><img src="./image/predication.png" alt=""></a></li>
+                <li ><a href="annonce.html"><img src="./image/annonce.png" alt=""></a></li>
+                <li><a href="#"><img src="./image/client.png" alt=""></a></li>
+                <li id="col"><a href="apropos.html"><img src="./image/info.png" alt=""></a></li>
+                <li><a href="#"><img src="./image/icons8-utilisateur-30.png" alt=""></a></li>
+                
+            </ul>
+        </nav>
+    </section>
+    <section class="droit">
+        <header>
+            <div class="haut">
+                <div class="logo">
+                    <h3>Semence Divine</h3>
+                </div>
+                <div class="btn">
+                    <a href="priere.html"><img src="./image/hands-and-gestures.png" alt=""></a>
+                </div>
+            </div>
+        </header>
+        <!-- Titre "À Propos de Nous" séparé en haut -->
+        <div class="about-title">
+            <h1>À propos de nous</h1>
+        </div>
+        
+        <!-- Section principale "À Propos de Nous" contenant les paragraphes -->
+        <div class="about-section">
+            <!-- Premier paragraphe : Vision -->
+            <div class="about-paragraph vision">
+                <h2>Notre vision</h2>
+                <p>
+                    À Semence Divine, nous croyons que chaque individu a une place dans le plan divin. Notre vision est de créer un lieu spirituel où chacun peut se ressourcer, s'épanouir et se rapprocher de Dieu. Nous voulons bâtir une église accueillante, où l'amour du Christ est palpable, et où chaque membre trouve un but en servant Dieu et en apportant sa lumière au monde. 
+                    Nous voyons Semence Divine comme un centre d'inspiration, un endroit où les âmes peuvent grandir dans la foi et se réconcilier avec elles-mêmes et les autres. Chaque prière, chaque célébration, chaque moment partagé est une occasion de renforcer notre relation avec Dieu et de tisser des liens fraternels. 
+                    Notre vision est aussi de contribuer activement à la communauté en partageant l'amour de Dieu, en répondant aux besoins spirituels et sociaux des plus démunis, et en œuvrant pour la paix et l'unité dans le monde. 
+                    La Semence Divine est une église dynamique qui voit grand pour l'avenir, et nous invitons chacun à participer activement à ce projet divin.
+                </p>
+            </div>
+    
+            <!-- Deuxième paragraphe : Valeurs -->
+            <div class="about-paragraph valeurs">
+                <h2>Nos valeurs</h2>
+                <p>
+                    Nos valeurs sont ancrées dans la foi chrétienne et le désir profond de vivre selon les enseignements du Christ. À Semence Divine, nous prônons avant tout l'amour, l'unité, la paix et la solidarité. L'amour inconditionnel du Christ est la pierre angulaire de notre église. Nous croyons que chacun doit être accueilli sans jugement, qu'il soit nouveau dans la foi ou qu'il cherche simplement à comprendre davantage. 
+                    L'unité est une autre valeur essentielle. Nous croyons qu'ensemble, dans la diversité, nous pouvons accomplir des choses extraordinaires. Semence Divine est une famille spirituelle où chaque membre a un rôle à jouer, et où l'unité dans la foi nous rend plus forts. 
+                    La paix est un autre principe que nous chérissons. Nous cherchons à apporter la paix non seulement dans nos cœurs, mais aussi autour de nous. À travers nos actions, nous voulons être des artisans de paix dans notre communauté et dans le monde. 
+                    Enfin, la solidarité est au cœur de notre mission. Nous croyons qu'il est de notre devoir de tendre la main à ceux qui en ont besoin, que ce soit spirituellement, émotionnellement ou matériellement. Nous sommes appelés à être des serviteurs du Christ, apportant réconfort et soutien à ceux qui traversent des épreuves.
+                </p>
+            </div>
+    
+            <!-- Troisième paragraphe : Mission -->
+            <div class="about-paragraph mission">
+                <h2>Notre mission</h2>
+                <p>
+                    La mission de Semence Divine est de propager l'amour et la parole de Dieu, d'éduquer et de guider les croyants dans leur marche spirituelle, et de contribuer au bien-être de notre communauté. Nous croyons que chaque individu est appelé à être une lumière dans ce monde, et notre mission est de les accompagner dans ce cheminement.
+                    Notre église n'est pas seulement un lieu de culte, mais un centre de formation spirituelle. Nous organisons des études bibliques, des séminaires, et des groupes de prière pour aider chacun à approfondir sa foi et sa relation avec Dieu. Nous offrons également un accompagnement pastoral pour les personnes traversant des moments difficiles.
+                    En dehors de nos activités religieuses, nous nous engageons activement dans des projets de solidarité. Nous organisons des collectes de fonds pour aider les nécessiteux, des distributions de nourriture pour les pauvres, et des programmes éducatifs pour les jeunes. Nous croyons que la foi doit se traduire par des actions concrètes et que chaque chrétien doit être un instrument du changement dans sa communauté.
+                    Enfin, notre mission est d’étendre notre impact spirituel en dehors de nos murs, en organisant des événements communautaires et en offrant des services d’aide spirituelle à ceux qui en ont besoin, peu importe où ils se trouvent. Nous croyons que notre église est un tremplin pour des vies transformées, et notre but ultime est d’apporter un changement positif dans le monde.
+                </p>
+            </div>
+        </div>
+    
+        <!-- Section Floutée -->
+        <div class="blurry-section">
+            <p>INNOSYS votre avenir dans le monde du digital</p>
+        </div>
+    </section>
+</body>
+</html>
