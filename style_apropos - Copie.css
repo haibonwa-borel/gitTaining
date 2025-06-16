@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+/* Style général du corps de la page */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F9F1E7; /* Fond clair pour une ambiance douce */
+    color: #3C2C1F;  /* Marron foncé */
+}
+
+/* Titre "À propos de nous" séparé en haut */
+.about-title {
+    text-align: center;
+    margin-top: 10px;
+    height: 100vh; /* La section prend toute la hauteur de la fenêtre */
+    background-image: url(./image/brown-black-concrete-church-cloudy-sky-daytime.jpg); /* Remplacez par le chemin de votre image */
+    background-size: cover; /* L'image couvre toute la section */
+    background-position: center; /* L'image est centrée */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    animation: slider 8s infinite;
+}
+@keyframes slider{
+    0%,100%{
+        background-image: url(./image/brown-black-concrete-church-cloudy-sky-daytime.jpg);
+    }
+    50%{
+        background-image: url(./image/closeup-wooden-christian-cross.jpg);
+        color: white;
+    }
+}
+
+.about-title h1 {
+    font-size: 3em;
+    color: white;
+    margin-bottom: 30px;
+    font-family: "Almendra", serif;
+    font-weight: 700;
+    text-transform: uppercase; /* Texte en majuscules */
+}
+
+/* Section principale "À Propos de Nous" */
+.about-section {
+    padding: 50px;
+    background-color: white;
+    color: #3c1f1f; /* Marron foncé */
+    text-align: center;
+    margin: 40px auto;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 900px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombre portée sur toute la section */
+    transition: all 0.3s ease-in-out;
+}
+
+.about-section:hover {
+    transform: translateY(-5px); /* Effet de survol */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Ombre renforcée au survol */
+}
+
+/* Paragraphe général */
+.about-paragraph {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 1.2em;
+    padding: 30px 20px;
+    border-radius: 8px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre sur les bordures */
+    transition: all 0.3s ease-in-out; /* Transition pour un effet de survol plus doux */
+}
+
+/* Titres des paragraphes */
+.about-paragraph h2 {
+    font-size: 2em;
+    font-weight: bold;
+    font-family: "Almendra", serif;
+    margin-bottom: 15px;
+    color: #3C2C1F; /* Marron foncé */
+}
+
+/* Paragraphe "Vision" avec bordure et ombre distincte */
+.vision {
+    border: 2px solid #3C2C1F; /* Bordure marron foncé */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Ombre légère sur le cadre */
+}
+
+/* Paragraphe "Valeurs" avec bordure et ombre distincte */
+.valeurs {
+    border: 2px solid #D6B69B; /* Bordure marron clair */
+    color: #3C2C1F; /* Texte marron foncé */
+    background-color: #F9F1E7; /* Fond très clair pour contraste */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombre plus marquée pour cette section */
+}
+
+/* Paragraphe "Mission" avec bordure et ombre distincte */
+.mission {
+    border: 2px solid #964503; /* Bordure marron foncé */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère mais distincte */
+    background-color: #a96738;
+}
+
+/* Section floutée - Message INNOSYS */
+.blurry-section {
+    position: relative;
+    background-color: #3C2C1F; /* Marron foncé */
+    color: white;
+    padding: 40px;
+    text-align: center;
+    font-size: 1.4em;
+    margin-top: 50px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-radius: 8px;
+    width: 100%; /* S'assure que la section prend toute la largeur */
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.blurry-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.4); /* Superposition blanche semi-transparente */
+    filter: blur(10px);  /* Flou de l'arrière-plan */
+    z-index: 1;
+}
+
+.blurry-section p {
+    position: relative;
+    z-index: 2;  /* Le texte sera au-dessus du flou */
+    font-size: 1.2em;
+}
+.gauche{
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 15px;
+    text-align: center;
+    background-color: rgba(251, 220, 186, 0.658);
+}
+.gauche nav{
+    padding: 30px 0;
+    height: 100%;
+}
+.gauche ul{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+.gauche nav ul li{
+    list-style: none;
+    text-decoration: none;
+    margin: 10px 0;
+    background-color: white;
+    padding: 8px;
+    border-radius: 50%;
+    transition: 0.3s ease;
+}
+.gauche nav ul li:hover{
+    transform: translateX(20px);
+    background-color: grey;
+}
+.gauche nav button{
+    height: 20px;
+    color: none;
+    background-color: none;
+    width: 20px;
+    border: none;
+    
+}
+.gauche nav button img{
+    height: 20px;
+    width: 20px;
+}
+.gauche li a img{
+    height: 20px;
+    width: 20px;
+}
+.droit{
+    padding: 0 0 0 55px;
+}
+
+h1, h2, h3, p, img,a{
+    opacity: 0;
+    transform: translateY(30px);
+    animation: anim 1.2s linear forwards;
+}
+@keyframes anim{
+    100%{
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
