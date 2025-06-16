@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Profil - Église Semence Divine</title>
+    <link rel="stylesheet" href="profil.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen font-sans antialiased">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="{{ route('home') }}" class="flex items-center">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo Église" class="h-10 mr-3">
+                <span class="text-xl font-bold text-gray-800">Semence Divine</span>
+            </a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="{{ route('home') }}" class="text-gray-600 hover:text-primary">Accueil</a>
+                <a href="{{ route('predication') }}" class="text-gray-600 hover:text-primary">Prédications</a>
+                <a href="{{ route('annonce') }}" class="text-gray-600 hover:text-primary">Annonces</a>
+                <a href="{{ route('propos') }}" class="text-gray-600 hover:text-primary">À propos</a>
+            </nav>
+            <button class="md:hidden text-gray-600">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-6xl mx-auto">
+            <!-- Profile Card -->
+            <div class="profile-card rounded-xl overflow-hidden mb-8">
+                <!-- Profile Header -->
+                <div class="profile-header p-6 text-center relative">
+                    <div class="absolute top-4 right-4">
+                        <a href="" class="text-white hover:text-gray-200">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="relative inline-block">
+                        <img src="{{ $fidele->photo ? asset('storage/'.$fidele->photo) : asset('images/default-avatar.jpg') }}" 
+                             class="w-32 h-32 rounded-full border-4 border-white shadow-lg mx-auto object-cover"
+                             alt="Photo de profil">
+                        
+                        <form method="POST" action="{{ route('profil.photo') }}" enctype="multipart/form-data" class="absolute bottom-0 right-0">
+                            @csrf
+                            <label class="bg-white p-2 rounded-full shadow-lg cursor-pointer hover:bg-gray-100 transition">
+                                <i class="fas fa-camera text-primary"></i>
+                                <input type="file" name="photo" class="hidden" onchange="this.form.submit()">
+                            </label>
+                        </form>
+                    </div>
+                    
+                    <h1 class="text-3xl font-bold text-white mt-4">{{ $fidele->nom }}</h1>
+                    <p class="text-white opacity-90">{{ $fidele->groupe ? ucfirst($fidele->groupe) : 'Membre' }}</p>
+                    
+                    <div class="flex justify-center space-x-4 mt-4">
+                        <a href="#" class="text-white hover:text-gray-200">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-gray-200">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-gray-200">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Profile Content -->
+                <div class="p-6 md:p-8">
+                    <div class="flex flex-col md:flex-row gap-8">
+                        <!-- Left Column - Personal Info -->
+                        <div class="md:w-1/2">
+                            <h2 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">Informations Personnelles</h2>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div class="text-primary mr-3 mt-1">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-600">Email</h3>
+                                        <p class="text-gray-800">{{ $fidele->email }}</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="text-primary mr-3 mt-1">
+                                        <i class="fas fa-birthday-cake"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-600">Date de naissance</h3>
+                                        <p class="text-gray-800">{{ $fidele->naissance->format('d/m/Y') }} ({{ \Carbon\Carbon::parse($fidele->naissance)->age }} ans)</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="text-primary mr-3 mt-1">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-600">Téléphone</h3>
+                                        <p class="text-gray-800">{{ $fidele->telephone ?? 'Non renseigné' }}</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="text-primary mr-3 mt-1">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-600">Adresse</h3>
+                                        <p class="text-gray-800">
+                                            {{ $fidele->adresse ?? 'Non renseignée' }}<br>
+                                            {{ $fidele->code_postal ?? '' }} {{ $fidele->ville ?? '' }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Column - Church Info -->
+                        <div class="md:w-1/2">
+                            <h2 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">Informations Église</h2>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div class="text-primary mr-3 mt-1">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-600">Date d'adhésion</h3>
+                                        <p class="text-gray-800">{{ $fidele->created_at->format('d/m/Y') }} ({{ $fidele->created_at->diffForHumans() }})</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="text-primary mr-3 mt-1">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-600">Groupe/Famille</h3>
+                                        <p class="text-gray-800">{{ $fidele->groupe ? ucfirst($fidele->groupe) : 'Non spécifié' }}</p>
+                                    </div>
+                                </div>
+                                
+                                {{-- <div class="flex items-start">
+                                    <div class="text-primary mr-3 mt-1">
+                                        <i class="fas fa-tasks"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-600">Rôle(s)</h3>
+                                        <p class="text-gray-800">
+                                            @if($fidele->groupe->count() > 0)
+                                                @foreach($fidele->roles as $role)
+                                                    <span class="inline-block bg-primary/10 text-primary px-2 py-1 rounded-full text-sm mr-1 mb-1">{{ $role->name }}</span>
+                                                @endforeach
+                                            @else
+                                                <span class="text-gray-500">Aucun rôle spécifié</span>
+                                            @endif
+                                        </p>
+                                    </div>
+                                </div> --}}
+                                
+                                <div class="flex items-start">
+                                    <div class="text-primary mr-3 mt-1">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-600">Participation</h3>
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+                                            <div class="bg-primary h-2.5 rounded-full" ></div>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">{{ $fidele->participation ?? 0 }}% des activités cette année</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Stats Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+                        <div class="stat-card p-4 rounded-lg shadow-sm border border-gray-100 text-center">
+                            <div class="text-primary text-3xl mb-2">
+                                <i class="fas fa-pray"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800">12</h3>
+                            <p class="text-gray-600 text-sm">Cultes ce mois</p>
+                        </div>
+                        
+                        <div class="stat-card p-4 rounded-lg shadow-sm border border-gray-100 text-center">
+                            <div class="text-primary text-3xl mb-2">
+                                <i class="fas fa-hand-holding-heart"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800">5</h3>
+                            <p class="text-gray-600 text-sm">Services rendus</p>
+                        </div>
+                        
+                        <div class="stat-card p-4 rounded-lg shadow-sm border border-gray-100 text-center">
+                            <div class="text-primary text-3xl mb-2">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-800">85%</h3>
+                            <p class="text-gray-600 text-sm">Présence</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Tabs -->
+                    <div class="mt-8">
+                        <div class="tabs flex space-x-6 border-b">
+                            <button class="tab-btn active py-2 px-1" data-tab="activites">Activités</button>
+                            <button class="tab-btn py-2 px-1" data-tab="dons">Dons/Offrandes</button>
+                            <button class="tab-btn py-2 px-1" data-tab="famille">Famille Spirituelle</button>
+                        </div>
+                        
+                        {{-- <div class="tab-content mt-4">
+                            <div id="activites" class="tab-pane active">
+                                <div class="space-y-4">
+                                    @foreach($activites as $activite)
+                                    <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition">
+                                        <div class="bg-primary/10 text-primary p-2 rounded-lg mr-3">
+                                            <i class="fas fa-calendar-day"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-semibold">{{ $activite->titre }}</h4>
+                                            <p class="text-sm text-gray-600">{{ $activite->date->format('d/m/Y H:i') }} • {{ $activite->lieu }}</p>
+                                        </div>
+                                        <div class="text-sm text-gray-500">
+                                            {{ $activite->participation ? 'Présent' : 'Absent' }}
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div> --}}
+                            
+                            <div id="dons" class="tab-pane hidden">
+                                <div class="text-center py-8">
+                                    <i class="fas fa-chart-pie text-4xl text-gray-300 mb-4"></i>
+                                    <p class="text-gray-500">Aucun don enregistré pour le moment</p>
+                                </div>
+                            </div>
+                            
+                            {{-- <div id="famille" class="tab-pane hidden">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    @foreach($familleSpirituelle as $membre)
+                                    <div class="flex items-center p-3 border rounded-lg hover:shadow transition">
+                                        <img src="{{ $membre->photo ? asset('storage/'.$membre->photo) : asset('images/default-avatar.jpg') }}" 
+                                             class="w-12 h-12 rounded-full mr-3 object-cover">
+                                        <div>
+                                            <h4 class="font-semibold">{{ $membre->nom }}</h4>
+                                            <p class="text-sm text-gray-600">{{ $membre->relation }}</p>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div> --}}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Footer Actions -->
+                <div class="bg-gray-50 px-6 py-4 border-t flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
+                    <a href="{{ route('home') }}" class="text-gray-600 hover:text-primary">
+                        <i class="fas fa-arrow-left mr-2"></i> Retour à l'accueil
+                    </a>
+                    
+                    <div class="flex space-x-3">
+                        <a href="" class="btn-primary text-white px-4 py-2 rounded-lg inline-flex items-center">
+                            <i class="fas fa-edit mr-2"></i> Modifier le profil
+                        </a>
+                        
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition inline-flex items-center">
+                                <i class="fas fa-sign-out-alt mr-2"></i> Déconnexion
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Message de succès -->
+    @if(session('success'))
+    <div class="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg floating-notification flex items-center">
+        <i class="fas fa-check-circle mr-2"></i>
+        <span>{{ session('success') }}</span>
+    </div>
+    <script>
+        setTimeout(() => {
+            document.querySelector('.floating-notification').classList.add('opacity-0', 'transition-opacity', 'duration-500');
+            setTimeout(() => {
+                document.querySelector('.floating-notification').remove();
+            }, 500);
+        }, 3000);
+    </script>
+    @endif
+
+    <script>
+        // Tab functionality
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and panes
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-pane').forEach(p => p.classList.add('hidden'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                // Show corresponding pane
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(tabId).classList.remove('hidden');
+            });
+        });
+        
+        // Mobile menu toggle would go here
+    </script>
+</body>
+</html>

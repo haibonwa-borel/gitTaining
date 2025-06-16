@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Église Semence Divine</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="dashboard.css" rel="stylesheet">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-user-shield"></i> Administration</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a>
+                <a href="#"><i class="fas fa-users"></i> Fidèles</a>
+                <a href="#"><i class="fas fa-calendar-check"></i> Participations</a>
+                <a href="#"><i class="fas fa-hand-holding-heart"></i> Dons</a>
+                <a href="#"><i class="fas fa-user-cog"></i> Paramètres</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <div class="header-left">
+                    <h1>Gestion des Fidèles</h1>
+                </div>
+                <div class="header-right">
+                    <div class="admin-search">
+                        <input type="text" placeholder="Rechercher un fidèle...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="admin-profile">
+                        <img src="{{ auth()->user()->photo ?? asset('images/default-avatar.jpg') }}" alt="Admin">
+                        <span>{{ auth()->user()->name }}</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="admin-content">
+                <!-- Fidèle Selection -->
+                <section class="member-select">
+                    <h2><i class="fas fa-user-friends"></i> Sélectionner un Fidèle</h2>
+                    <div class="select-container">
+                        <select id="memberSelect">
+                            <option value="">-- Choisir un fidèle --</option>
+                            @foreach($fideles as $fidele)
+                            <option value="{{ $fidele->id }}">{{ $fidele->nom }} ({{ $fidele->groupe }})</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </section>
+
+                <!-- Fidèle Details -->
+                <section class="member-details" id="memberDetails" style="display:none;">
+                    <div class="details-header">
+                        <div class="member-photo">
+                            <img id="detailPhoto" src="" alt="Photo du fidèle">
+                        </div>
+                        <div class="member-info">
+                            <h2 id="detailName"></h2>
+                            <p id="detailGroup"></p>
+                            <div class="member-stats">
+                                <div class="stat-item">
+                                    <span class="stat-value" id="detailParticipation">0%</span>
+                                    <span class="stat-label">Participation</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" id="detailActivities">0</span>
+                                    <span class="stat-label">Activités</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Participation Form -->
+                    <form id="participationForm" class="participation-form">
+                        @csrf
+                        <input type="hidden" name="fidele_id" id="fideleId">
+
+                        <div class="form-section">
+                            <h3><i class="fas fa-calendar-check"></i> Enregistrer une Participation</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="activityType">Type d'activité</label>
+                                    <select name="activity_type" id="activityType" required>
+                                        <option value="culte">Culte</option>
+                                        <option value="reunion">Réunion</option>
+                                        <option value="evangelisation">Évangélisation</option>
+                                        <option value="autre">Autre</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="activityDate">Date</label>
+                                    <input type="date" name="activity_date" id="activityDate" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="participationStatus">Statut</label>
+                                    <select name="participation_status" id="participationStatus" required>
+                                        <option value="present">Présent</option>
+                                        <option value="absent">Absent</option>
+                                        <option value="excuse">Excusé</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="activityNotes">Notes</label>
+                                    <textarea name="activity_notes" id="activityNotes" rows="2"></textarea>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-save">
+                                <i class="fas fa-save"></i> Enregistrer
+                            </button>
+                        </div>
+
+                        <!-- Participation Progress -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-chart-line"></i> Niveau de Participation</h3>
+                            <div class="progress-container">
+                                <div class="progress-labels">
+                                    <span>0%</span>
+                                    <span id="currentParticipation">0%</span>
+                                    <span>100%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="participationFill"></div>
+                                </div>
+                                <div class="progress-actions">
+                                    <button type="button" class="btn-adjust" data-action="increase">
+                                        <i class="fas fa-plus"></i> Augmenter
+                                    </button>
+                                    <button type="button" class="btn-adjust" data-action="decrease">
+                                        <i class="fas fa-minus"></i> Diminuer
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Recent Activities -->
+                    <div class="activities-list">
+                        <h3><i class="fas fa-history"></i> Dernières Participations</h3>
+                        <div class="activities-container" id="activitiesContainer">
+                            <!-- Les activités seront chargées ici via JavaScript -->
+                            <p class="no-activities">Aucune participation enregistrée</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ asset('js/admin.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Sélection du fidèle
+    const memberSelect = document.getElementById('memberSelect');
+    const memberDetails = document.getElementById('memberDetails');
+    
+    memberSelect.addEventListener('change', function() {
+        if (this.value) {
+            // Simuler la récupération des données (remplacer par AJAX en réel)
+            const selectedMemberId = this.value;
+            loadMemberData(selectedMemberId);
+            memberDetails.style.display = 'block';
+        } else {
+            memberDetails.style.display = 'none';
+        }
+    });
+    
+    // Gestion de la participation
+    const adjustButtons = document.querySelectorAll('.btn-adjust');
+    adjustButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const action = this.getAttribute('data-action');
+            adjustParticipation(action);
+        });
+    });
+    
+    // Soumission du formulaire
+    const participationForm = document.getElementById('participationForm');
+    participationForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        saveParticipation();
+    });
+});
+
+function loadMemberData(memberId) {
+    // Simuler une requête AJAX
+    setTimeout(() => {
+        // Données simulées (remplacer par une vraie requête)
+        const memberData = {
+            id: memberId,
+            name: "Jean Dupont",
+            group: "Groupe Alpha",
+            photo: "/images/default-avatar.jpg",
+            participation: 65,
+            activities: 12
+        };
+        
+        // Mettre à jour l'interface
+        document.getElementById('detailName').textContent = memberData.name;
+        document.getElementById('detailGroup').textContent = memberData.group;
+        document.getElementById('detailPhoto').src = memberData.photo;
+        document.getElementById('detailParticipation').textContent = memberData.participation + '%';
+        document.getElementById('detailActivities').textContent = memberData.activities;
+        document.getElementById('fideleId').value = memberData.id;
+        
+        // Mettre à jour la barre de progression
+        updateProgressBar(memberData.participation);
+        
+        // Charger les activités (simulé)
+        loadActivities(memberId);
+    }, 500);
+}
+
+function updateProgressBar(percentage) {
+    const fill = document.getElementById('participationFill');
+    const current = document.getElementById('currentParticipation');
+    
+    fill.style.width = percentage + '%';
+    current.textContent = percentage + '%';
+}
+
+function adjustParticipation(action) {
+    const current = document.getElementById('currentParticipation');
+    let percentage = parseInt(current.textContent);
+    
+    if (action === 'increase' && percentage < 100) {
+        percentage += 5;
+    } else if (action === 'decrease' && percentage > 0) {
+        percentage -= 5;
+    }
+    
+    updateProgressBar(percentage);
+}
+
+function saveParticipation() {
+    const form = document.getElementById('participationForm');
+    const formData = new FormData(form);
+    
+    // Simuler l'envoi AJAX
+    console.log('Données envoyées:', Object.fromEntries(formData));
+    
+    // Afficher un message de succès
+    alert('Participation enregistrée avec succès!');
+    
+    // Recharger les données (simulé)
+    const memberId = document.getElementById('fideleId').value;
+    loadMemberData(memberId);
+}
+
+function loadActivities(memberId) {
+    // Simuler le chargement des activités
+    const activitiesContainer = document.getElementById('activitiesContainer');
+    
+    // Données simulées
+    const activities = [
+        { type: 'Culte', date: '2023-05-15', status: 'present', notes: '' },
+        { type: 'Réunion', date: '2023-05-10', status: 'absent', notes: 'Maladie' },
+        { type: 'Évangélisation', date: '2023-05-05', status: 'present', notes: 'Participation active' }
+    ];
+    
+    // Vider le conteneur
+    activitiesContainer.innerHTML = '';
+    
+    if (activities.length === 0) {
+        activitiesContainer.innerHTML = '<p class="no-activities">Aucune participation enregistrée</p>';
+        return;
+    }
+    
+    // Ajouter chaque activité
+    activities.forEach(activity => {
+        const activityElement = document.createElement('div');
+        activityElement.className = 'activity-item';
+        
+        const statusClass = {
+            present: 'status-present',
+            absent: 'status-absent',
+            excuse: 'status-excuse'
+        }[activity.status] || '';
+        
+        activityElement.innerHTML = `
+            <div class="activity-info">
+                <div class="activity-type">${activity.type}</div>
+                <div class="activity-date">${new Date(activity.date).toLocaleDateString('fr-FR')}</div>
+            </div>
+            <div class="activity-status ${statusClass}">
+                ${activity.status === 'present' ? 'Présent' : 
+                  activity.status === 'absent' ? 'Absent' : 'Excusé'}
+            </div>
+        `;
+        
+        activitiesContainer.appendChild(activityElement);
+    });
+}
+    </script>
+</body>
+</html>
