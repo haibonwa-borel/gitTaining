@@ -1,0 +1,220 @@
+<?php
+require_once 'config/config.php';
+require_once 'utils/Auth.php';
+
+// Rediriger vers le tableau de bord si connecté
+if (Auth::isLoggedIn()) {
+    header('Location: dashboard.php');
+    exit();
+}
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo APP_NAME; ?> - Accueil</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body class="landing-page">
+    <div class="landing-container">
+        <nav class="landing-nav">
+            <div class="nav-brand">
+                <i class="fas fa-users-cog"></i>
+                <span><?php echo APP_NAME; ?></span>
+            </div>
+            <div class="nav-links">
+                <a href="login.php" class="btn btn-outline">Connexion</a>
+                <a href="profil.html" class="btn btn-primary">S'inscrire</a>
+            </div>
+        </nav>
+
+        <header class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Gestion RH Intelligente
+                    <span class="gradient-text">avec IA Prédictive</span>
+                </h1>
+                <p class="hero-description">
+                    Optimisez la gestion de vos ressources humaines avec notre plateforme avancée. 
+                    Prédiction de turnover, gestion des congés, suivi des performances et bien plus encore.
+                </p>
+                <div class="hero-buttons">
+                    <a href="profil.html" class="btn btn-primary btn-large">
+                        <i class="fas fa-rocket"></i>
+                        Commencer
+                    </a>
+                    <a href="dashbooard.html" class="btn btn-outline btn-large">
+                        <i class="fas fa-play"></i>
+                        Voir la Démo
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="dashboard-preview">
+                    <div class="preview-header">
+                        <div class="preview-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <div class="preview-content">
+                        <div class="preview-sidebar">
+                            <div class="sidebar-item active"></div>
+                            <div class="sidebar-item"></div>
+                            <div class="sidebar-item"></div>
+                            <div class="sidebar-item"></div>
+                        </div>
+                        <div class="preview-main">
+                            <div class="preview-cards">
+                                <div class="preview-card"></div>
+                                <div class="preview-card"></div>
+                                <div class="preview-card"></div>
+                            </div>
+                            <div class="preview-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2 class="section-title">Fonctionnalités Avancées</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>IA Prédictive</h3>
+                        <p>Prédiction intelligente du turnover avec recommandations personnalisées pour retenir vos talents.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>Gestion des Congés</h3>
+                        <p>Système complet de demande, approbation et suivi des congés avec notifications automatiques.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Suivi des Performances</h3>
+                        <p>Évaluations périodiques, objectifs personnalisés et tableaux de bord de performance détaillés.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Gestion des Employés</h3>
+                        <p>Base de données complète avec profils détaillés, historique et gestion des compétences.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Sécurité Avancée</h3>
+                        <p>Authentification multi-niveaux, sauvegarde automatique et protection des données sensibles.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Interface Responsive</h3>
+                        <p>Accès optimal sur tous les appareils avec une interface moderne et intuitive.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">Précision IA</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50%</div>
+                        <div class="stat-label">Réduction Turnover</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Support</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">Entreprises</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="team-section">
+            <div class="container">
+                <h2 class="section-title">Notre Équipe</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Sassa Lucien Loic</h3>
+                        <p>Lead Developer</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Damso</h3>
+                        <p>Creative Director</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Shilsa</h3>
+                        <p>UI/UX Designer</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Florinda</h3>
+                        <p>Project Manager</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Losa</h3>
+                        <p>Data Analyst</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="landing-footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <i class="fas fa-users-cog"></i>
+                        <span><?php echo APP_NAME; ?></span>
+                    </div>
+                    <div class="footer-links">
+                        <a href="#features">Fonctionnalités</a>
+                        <a href="#pricing">Tarifs</a>
+                        <a href="#contact">Contact</a>
+                        <a href="login.php">Connexion</a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 <?php echo APP_NAME; ?>. Tous droits réservés.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="assets/js/landing.js"></script>
+</body>
+</html>
