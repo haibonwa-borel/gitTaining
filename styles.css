@@ -1,0 +1,12 @@
+/* Styles personnalisés */
+body {
+    font-family: 'Arial', sans-serif;
+}
+.container {
+    max-width: 1200px;
+}
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
